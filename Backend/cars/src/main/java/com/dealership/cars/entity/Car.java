@@ -17,11 +17,11 @@ public class Car {
     private String model;
     private String version;
     private Integer year;
+    private Long price;
 
     public Car(){
 
     }
-
 
     public Integer getId() {
         return this.id;
@@ -55,5 +55,12 @@ public class Car {
         this.year = year;
     }
 
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
 
 }
