@@ -46,6 +46,10 @@ public class CarService {
         return repository.findAll();
     }
 
+    public Car getCarByModel(String model){
+        return repository.findByModel(model);
+    }
+
     public Car getCarById(Integer id){
         return repository.findById(id).orElse(null);
     }
