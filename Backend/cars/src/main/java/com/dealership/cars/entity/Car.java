@@ -18,6 +18,7 @@ public class Car {
     private String version;
     private Integer year;
     private Long price;
+    private Boolean isEnabled;
 
     public Car(){
 
@@ -61,6 +62,14 @@ public class Car {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Boolean getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(Boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
 }
