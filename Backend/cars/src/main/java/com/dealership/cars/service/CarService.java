@@ -16,15 +16,28 @@ public class CarService {
 
     //Post
     public Car saveCar(Car car){
-        if(car.getModel() == null && car.getVersion() == null && car.getYear() == null && car.getPrice() == null){
-            throw new IllegalArgumentException("The car attributes are empty");
-        }else{
-            if(car.getPrice() < minCarPrice){
-                throw new IllegalArgumentException("The car price must be more than 10.000");
-            }else{
-                return repository.save(car);
-            }
+         
+        if(car.getModel() == null){
+            throw new IllegalArgumentException("The car model is empty");
         }
+
+        if(car.getVersion() == null){
+            throw new IllegalArgumentException("The car version is empty");
+        }
+
+        if(car.getYear() == null){
+            throw new IllegalArgumentException("The car year is empty");
+        }
+
+        if(car.getPrice() == null){
+            throw new IllegalArgumentException("The car price is empty");
+        }
+
+        if(car.getPrice() < minCarPrice){
+            throw new IllegalArgumentException("The car price have to be higher than " + minCarPrice);
+        }
+        
+        return repository.save(car);
         
     }
 
