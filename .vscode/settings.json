@@ -10,7 +10,7 @@
             "driver": "MySQL",
             "name": "test",
             "database": "cars",
-            "username": "root",
+            "username": "root ",
             "password": "Dirt!12345"
         }
     ]
