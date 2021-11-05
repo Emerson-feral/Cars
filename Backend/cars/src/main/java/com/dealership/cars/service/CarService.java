@@ -16,6 +16,8 @@ public class CarService {
 
     //Post
     public Car saveCar(Car car){
+
+        car.setIsEnabled(true);
          
         if(car.getModel() == null){
             throw new IllegalArgumentException("The car model is empty");
@@ -58,6 +60,14 @@ public class CarService {
     public String deleteCar(Integer id){
         repository.deleteById(id);
         return "Car removed " + id ;
+    }
+
+    //Update
+    public Car disableCarAttribute(Car car){
+        Car atualCar = repository.findById(car.getId()).orElse(null);
+        atualCar.setIsEnabled(false);
+        return repository.save(atualCar);
+        
     }
      
 }
