@@ -12,7 +12,7 @@ public class CarService {
     @Autowired
     private IcarRepository repository;
 
-    private Double minCarPrice = 10.000;
+    private final Double MIN_CAR_PRICE = 10.000;
 
     //Post
     public Car saveCar(Car car){
@@ -35,8 +35,8 @@ public class CarService {
             throw new IllegalArgumentException("The car price is empty");
         }
 
-        if(car.getPrice() < minCarPrice){
-            throw new IllegalArgumentException("The car price have to be higher than " + minCarPrice);
+        if(car.getPrice() < MIN_CAR_PRICE){
+            throw new IllegalArgumentException("The car price have to be higher than " + MIN_CAR_PRICE);
         }
         
         return repository.save(car);
