@@ -1,5 +1,7 @@
 package com.dealership.cars.service;
 
+import java.util.Optional;
+
 import com.dealership.cars.entity.Brand;
 import com.dealership.cars.entity.Car;
 import com.dealership.cars.repository.ICarRepository;
@@ -15,6 +17,8 @@ public class CarService {
     private ICarRepository repository;
     @Autowired
     private BrandService brandService;
+    @Autowired
+    private PriceQuotationService priceQuotationService;
 
   
 
@@ -25,6 +29,7 @@ public class CarService {
 
         car.setIsEnabled(true);
 
+        car.setPrice(null);
          
         if(car.getModel() == null){
             throw new IllegalArgumentException("The car model is empty");
@@ -38,24 +43,19 @@ public class CarService {
             throw new IllegalArgumentException("The car brand is empty");
         }
 
-        Iterable<Brand> allBrands = brandService.getBrands();
+        Optional<Brand> brand = brandService.getBrandById(car.getBrand().getId());
 
-        for (Brand brand : allBrands) {
-            if(car.getBrand().getId() != brand.getId() ){
-                throw new IllegalArgumentException("This car brand doesn't exist");
-            } 
-        }
+        if(brand.get() == null ){
+            throw new IllegalArgumentException("This car brand doesn't exist");
+        } 
+       
+       
+        Car savedCar = repository.save(car);
 
-        if(car.getPrice() == null){
-            throw new IllegalArgumentException("The car price is empty");
-        }
+        priceQuotationService.openQuotation(car);
 
-        if(car.getPrice() < MIN_CAR_PRICE){
-            throw new IllegalArgumentException("The car price have to be higher than " + MIN_CAR_PRICE);
-        }
-        
-        return repository.save(car);
-        
+        return savedCar;
+
     }
 
     //Get
