@@ -1,5 +1,7 @@
 package com.dealership.cars.service;
 
+import java.util.Optional;
+
 import com.dealership.cars.entity.Brand;
 import com.dealership.cars.entity.Car;
 import com.dealership.cars.repository.IBrandRepository;
@@ -42,5 +44,9 @@ public class BrandService {
         
         return "Brand removed " + id;
         
+    }
+
+    public Optional<Brand> getBrandById(Integer id) {
+        return repository.findById(id);
     }
 }
