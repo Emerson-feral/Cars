@@ -22,7 +22,8 @@ public class PriceQuotationService {
     public PriceQuotation openQuotation(Car car){
         PriceQuotation priceQuotation = new PriceQuotation();
         priceQuotation.setCar(car);
-
+        priceQuotation.setStatus(PriceQuotationStatus.OPEN);
+        
         return priceQuotationRepository.save(priceQuotation);
     }
 
@@ -42,5 +43,9 @@ public class PriceQuotationService {
         carRepository.save(priceQuotation.getCar());
 
         return priceQuotationClosed;
+    }
+
+    public Iterable<PriceQuotation> getQuotations() {
+        return priceQuotationRepository.findAll();
     }
 }
